@@ -2,62 +2,37 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <title>Dynamic Products from Google Sheets</title>
-  <style>
-    .product-card {
-      border: 1px solid #ccc;
-      padding: 15px;
-      margin: 10px;
-      width: 220px;
-      display: inline-block;
-      vertical-align: top;
-      text-align: center;
-      border-radius: 8px;
-      box-shadow: 1px 1px 6px #aaa;
-    }
-    .product-card img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;
-    }
-    .price {
-      color: green;
-      font-weight: bold;
-      margin-top: 8px;
-    }
-  </style>
+  <title>Google Sheets থেকে প্রোডাক্ট লোড</title>
 </head>
 <body>
 
-  <h1>আমাদের প্রোডাক্টসমূহ</h1>
-  <div id="product-list">লোড হচ্ছে...</div>
+<div id="product-list">লোড হচ্ছে...</div>
 
-  <!-- Tabletop.js লাইব্রেরি -->
-  <script src="https://cdn.jsdelivr.net/npm/tabletop@1.6.0/tabletop.min.js"></script>
+<!-- Tabletop.js অবশ্যই এখানে যোগ করো -->
+<script src="https://cdn.jsdelivr.net/npm/tabletop@1.6.0/tabletop.min.js"></script>
 
-  <script>
-    window.onload = function() {
-      Tabletop.init({
-        key: '1Q35W5CXTGIQRiPEQEhy3lJAos5NCbnboqJMAm01vymE', // Spreadsheet ID বসাও এখানে
-        simpleSheet: true,
-        callback: function(data, tabletop) {
-          let container = document.getElementById('product-list');
-          container.innerHTML = ''; // আগে যা ছিলো তা ক্লিয়ার কর
-
-          data.forEach(product => {
-            container.innerHTML += `
-              <div class="product-card" data-category="${product.category}">
-                <img src="${product.image_url}" alt="${product.name}" />
-                <h3>${product.name}</h3>
-                <p>${product.description}</p>
-                <p class="price">${product.price}</p>
-              </div>
-            `;
-          });
-        }
-      });
-    };
-  </script>
+<script>
+  window.onload = function() {
+    Tabletop.init({
+      key: '1Q35W5CXTGIQRiPEQEhy3lJAos5NCbnboqJMAm01vymE',
+      simpleSheet: true,
+      callback: function(data, tabletop) {
+        let container = document.getElementById('product-list');
+        container.innerHTML = '';
+        data.forEach(product => {
+          container.innerHTML += `
+            <div class="product-card" data-category="${product.category}">
+              <img src="${product.image_url}" alt="${product.name}" />
+              <h3>${product.name}</h3>
+              <p>${product.description}</p>
+              <p class="price">${product.price}</p>
+            </div>
+          `;
+        });
+      }
+    });
+  };
+</script>
 
 </body>
 </html>
