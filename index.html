@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product List</title>
+  <style>
+    .product {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+      width: 200px;
+      display: inline-block;
+      text-align: center;
+    }
+    img { width: 100%; }
+  </style>
+</head>
+<body>
+
+  <h1>Our Products</h1>
+  <div id="products"></div>
+
+  <!-- Tabletop.js Script -->
+  <script src="https://cdn.jsdelivr.net/npm/tabletop@1.6.0/tabletop.min.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', init)
+
+    function init() {
+      Tabletop.init({
+        key: 'https://docs.google.com/spreadsheets/d/1k9SDOj0BZOs1F2EO9d9vqow6Oe9Qm-ZzgnAfIJCVqD0/edit?usp=sharing',
+        simpleSheet: true,
+        callback: showData
+      });
+    }
+
+    function showData(data) {
+      let container = document.getElementById("products");
+      data.forEach(item => {
+        container.innerHTML += `
+          <div class="product">
+            <img src="${item.Image}" alt="${item.Name}">
+            <h3>${item.Name}</h3>
+            <p>Price: ${item.Price}</p>
+          </div>
+        `;
+      });
+    }
+  </script>
+
+</body>
+</html>
